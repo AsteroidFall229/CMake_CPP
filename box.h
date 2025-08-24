@@ -61,6 +61,7 @@ namespace CLASS {
         std::uniform_int_distribution<int> dist;
         std::array<int, 6> history;
         int history_index;
+        std::array<int, 7> count;
         const int history_size = 6;
     public:
         Random();

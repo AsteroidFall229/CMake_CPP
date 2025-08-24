@@ -36,29 +36,37 @@ void tools::windowSize(int width, int height) {
 
 //CLASS::Random
 CLASS::Random::Random()
-    : engine(rd()), dist(1, 6), history({0}), history_index(0) {
-    // 预热随机数引擎
-    for (int i = 0; i < 100; ++i) {
+    : engine(rd()), dist(1, 6), history({0}), history_index(0), count({0}) {
+    // 优化预热
+    for (int i = 0; i < 10; ++i) {
         engine();
     }
 }
 int CLASS::Random::r() {
-    constexpr int max_attempts = 50;//最大尝试50次
+    constexpr int max_attempts = 50;
     int result;
 
     for (int attempt = 0; attempt < max_attempts; ++attempt) {
         result = dist(engine);
 
-        // 检查该数字最近是否出现过于频繁
-        int count = std::count(history.begin(), history.end(), result);
-        if (count < 2) { // 允许最多连续出现2次
+        // O(1) 时间复杂度的检查
+        if (count[result] < 2) {
             break;
         }
     }
 
-    // 更新历史记录
+    // 更新历史记录和计数
+    int old_value = history[history_index];
+    if (old_value >= 1 && old_value <= 6) {
+        count[old_value]--;
+    }
+
     history[history_index] = result;
     history_index = (history_index + 1) % history_size;
+
+    if (result >= 1 && result <= 6) {
+        count[result]++;
+    }
 
     return result;
 }
@@ -214,5 +222,3 @@ int  CLASS::Table::List::getScore() const {
 }
 
 //CLASS::Table
-
-
