@@ -2,15 +2,19 @@
 
 using namespace stdio;
 
-//CLASS::Random ran;
-CLASS::Alt alt;
+CLASS::Random ran;
+//CLASS::Alt alt;
 
 int main() {
+    tools::initConsole();
+    //tools::setColor(color::red,color::cyan);
     for (int i = 1; i <= 100; i++) {
-        cout<<alt.x()<<"\n";
+        cout<<ran<<"\n";
     }
-    tools::sleep(1500);
-    tools::cls();
+    tools::sleep(500);
+    //tools::cls();
+    Game::T[0][0].flushFontColor();
+    tools::put();
     getch();
     return 0;
 }

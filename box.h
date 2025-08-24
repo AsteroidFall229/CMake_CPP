@@ -16,25 +16,7 @@
 #include <windows.h>
 #include <conio.h>
 
-
-namespace stdio {
-    using std::cout;
-    using std::endl;
-    using std::cin;
-    using std::left;
-    using std::right;
-    using std::setw;
-}
-namespace tools {
-    inline void sleep(const int ms) {std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
-    inline void cls() {system("cls");}
-    static void windowSize(int width, int height);
-    void initConsole();
-    void setColor(int font = 7, int bg = 0);
-    void put();
-    inline void slept(const int ms){put();sleep(ms);}
-}
-enum class color : int {
+enum class color : uint8_t {
     black =     0,   // 黑色 - 文字和背景都可用
     blue =      1,   // 蓝色 - 文字和背景都可用
     green =     2,   // 绿色 - 文字和背景都可用
@@ -53,6 +35,23 @@ enum class color : int {
     l_yellow =  14,  // 亮黄色 - 主要用作文字色
     white =     15,  // 白色色 - 主要用作文字色
 };
+namespace stdio {
+    using std::cout;
+    using std::endl;
+    using std::cin;
+    using std::left;
+    using std::right;
+    using std::setw;
+}
+namespace tools {
+    inline void sleep(const int ms) {std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
+    inline void cls() {system("cls");}
+    static void windowSize(int width, int height);
+    void initConsole();
+    void setColor(color font = color::white, color bg = color::black);
+    void put();
+    inline void slept(const int ms){put();sleep(ms);}
+}
 namespace CLASS {
     class Random {
     private:
@@ -86,7 +85,7 @@ namespace CLASS {
                 color font{color::white};
             };
             Unit unit[3];
-        int bg{7};
+        color bg{color::black};
             List();
             bool isFull() const{return unit[0].value != 0 && unit[1].value != 0 && unit[2].value != 0;}
             void flushFontColor();
@@ -94,19 +93,27 @@ namespace CLASS {
             void inputValue(int);
             int getScore() const;
             const Unit& operator[](int i) const {return unit[i];}
+            Unit& operator[](int i) {return unit[i];}
         };
         List list[3];
         std::string gamer_name;
     public:
         int random{0};
-        color bg;
+        color bg_use{color::l_gray};
         void setGamerName(const std::string& name) {gamer_name = name;}
         const std::string& getGamerName() const {return gamer_name;}
-        explicit Table(std::string g="Player") : gamer_name(std::move(g)), bg({color::black, color::black,color::black}) {}
+        explicit Table(std::string g="Player") : gamer_name(std::move(g)) {}
         const List& operator[](int i) const {return list[i];}
+        List& operator[](int i) {return list[i];}
         int getScore(const int i) const {return list[i].getScore();}
         int getScore() const {return list[0].getScore()+list[1].getScore()+list[2].getScore();}
     };
+}
+
+namespace Game {
+    inline CLASS::Random random;
+    inline CLASS::Alt alt;
+    inline CLASS::Table T[2];
 }
 
 #endif
