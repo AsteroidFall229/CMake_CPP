@@ -70,7 +70,7 @@ CLASS::Random::operator int() {
     return this->r();
 }
 
-//CLASS::List
+//CLASS::Table::List
 CLASS::Table::List::List () {
     unit[0].value=0;
     unit[1].value=0;
@@ -80,12 +80,9 @@ CLASS::Table::List::List () {
     unit[2].font =color::white;
 }
 void CLASS::Table::List::flushFontColor() {
-    int v0 = unit[0].value;
-    int v1 = unit[1].value;
-    int v2 = unit[2].value;
 
     // 三个相同
-    if (v0 == v1 && v1 == v2 && v0 >= 1 && v0 <= 6) {
+    if (unit[0].value == unit[1].value && unit[1].value == unit[2].value && unit[0].value >= 1 && unit[0].value <= 6) {
         unit[0].font = color::cyan;
         unit[1].font = color::cyan;
         unit[2].font = color::cyan;
@@ -93,7 +90,7 @@ void CLASS::Table::List::flushFontColor() {
     }
 
     // 前两个相同
-    if (v0 == v1 && v0 >= 1 && v0 <= 6) {
+    if (unit[0].value == unit[1].value && unit[0].value >= 1 && unit[0].value <= 6) {
         unit[0].font = color::yello;
         unit[1].font = color::yello;
         unit[2].font = color::white;
@@ -101,7 +98,7 @@ void CLASS::Table::List::flushFontColor() {
     }
 
     // 第一个和第三个相同
-    if (v0 == v2 && v0 >= 1 && v0 <= 6) {
+    if (unit[0].value == unit[2].value && unit[0].value >= 1 && unit[0].value <= 6) {
         unit[0].font = color::yello;
         unit[2].font = color::yello;
         unit[1].font = color::white;
@@ -109,7 +106,7 @@ void CLASS::Table::List::flushFontColor() {
     }
 
     // 后两个相同
-    if (v1 == v2 && v1 >= 1 && v1 <= 6) {
+    if (unit[1].value == unit[2].value && unit[1].value >= 1 && unit[1].value <= 6) {
         unit[1].font = color::yello;
         unit[2].font = color::yello;
         unit[0].font = color::white;
@@ -215,3 +212,7 @@ int  CLASS::Table::List::getScore() const {
         return unit[0].value * 4 + unit[1].value;
     return unit[0].value + unit[1].value + unit[2].value;
 }
+
+//CLASS::Table
+
+
