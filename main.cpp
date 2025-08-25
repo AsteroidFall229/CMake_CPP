@@ -9,7 +9,7 @@ int main() {
     tools::initConsole();
     //tools::setColor(color::red,color::cyan);
     for (int i = 1; i <= 100; i++) {
-        cout<<ran<<"\n";
+        cout << ran << "\n" ;
     }
     tools::sleep(500);
     //tools::cls();

@@ -109,7 +109,6 @@ namespace CLASS {
         int getScore() const {return list[0].getScore()+list[1].getScore()+list[2].getScore();}
     };
 }
-
 namespace Game {
     inline CLASS::Random random;
     inline CLASS::Alt alt;

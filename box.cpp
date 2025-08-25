@@ -87,6 +87,7 @@ CLASS::Table::List::List () {
     unit[0].value=1;
     unit[1].value=2;
     unit[2].value=3;
+
     unit[0].font =color::white;
     unit[1].font =color::white;
     unit[2].font =color::white;
