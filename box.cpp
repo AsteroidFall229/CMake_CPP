@@ -85,57 +85,57 @@ CLASS::Random::operator int() {
 //CLASS::Table::List
 CLASS::Table::List::List () {
     unit[0].value=1;
-    unit[1].value=2;
-    unit[2].value=3;
+    unit[1].value=0;
+    unit[2].value=0;
 
-    unit[0].font =color::white;
-    unit[1].font =color::white;
-    unit[2].font =color::white;
+    unit[0].color =color::white;
+    unit[1].color =color::white;
+    unit[2].color =color::white;
 }
 void CLASS::Table::List::flushFontColor() {
 
     // 三个相同
     if (unit[0].value == unit[1].value && unit[1].value == unit[2].value && unit[0].value >= 1 && unit[0].value <= 6) {
-        unit[0].font = color::cyan;
-        unit[1].font = color::cyan;
-        unit[2].font = color::cyan;
+        unit[0].color = color::cyan;
+        unit[1].color = color::cyan;
+        unit[2].color = color::cyan;
         return;
     }
 
     // 前两个相同
     if (unit[0].value == unit[1].value && unit[0].value >= 1 && unit[0].value <= 6) {
-        unit[0].font = color::yello;
-        unit[1].font = color::yello;
-        unit[2].font = color::white;
+        unit[0].color = color::yello;
+        unit[1].color = color::yello;
+        unit[2].color = color::white;
         return;
     }
 
     // 第一个和第三个相同
     if (unit[0].value == unit[2].value && unit[0].value >= 1 && unit[0].value <= 6) {
-        unit[0].font = color::yello;
-        unit[2].font = color::yello;
-        unit[1].font = color::white;
+        unit[0].color = color::yello;
+        unit[2].color = color::yello;
+        unit[1].color = color::white;
         return;
     }
 
     // 后两个相同
     if (unit[1].value == unit[2].value && unit[1].value >= 1 && unit[1].value <= 6) {
-        unit[1].font = color::yello;
-        unit[2].font = color::yello;
-        unit[0].font = color::white;
+        unit[1].color = color::yello;
+        unit[2].color = color::yello;
+        unit[0].color = color::white;
         return;
     }
 
     // 没有相同数字
-    unit[0].font = color::white;
-    unit[1].font = color::white;
-    unit[2].font = color::white;
+    unit[0].color = color::white;
+    unit[1].color = color::white;
+    unit[2].color = color::white;
 }
 void CLASS::Table::List::deleteValue(const int dvl) {
     // 标记要删除的数字
-    if (unit[0].value == dvl) unit[0].font = color::red;
-    if (unit[1].value == dvl) unit[1].font = color::red;
-    if (unit[2].value == dvl) unit[2].font = color::red;
+    if (unit[0].value == dvl) unit[0].color = color::red;
+    if (unit[1].value == dvl) unit[1].color = color::red;
+    if (unit[2].value == dvl) unit[2].color = color::red;
 
     tools::put();
     tools::slept(200);
@@ -143,17 +143,17 @@ void CLASS::Table::List::deleteValue(const int dvl) {
     // 处理第一个位置的删除
     if (unit[0].value == dvl) {
         unit[0].value = 0;
-        unit[0].font = color::white;
+        unit[0].color = color::white;
         tools::put();
         tools::slept(200);
 
         // 下移后面的数字
         unit[0].value = unit[1].value;
-        unit[0].font = unit[1].font;
+        unit[0].color = unit[1].color;
         unit[1].value = unit[2].value;
-        unit[1].font = unit[2].font;
+        unit[1].color = unit[2].color;
         unit[2].value = 0;
-        unit[2].font = color::white;
+        unit[2].color = color::white;
 
         tools::put();
         tools::slept(200);
@@ -168,15 +168,15 @@ void CLASS::Table::List::deleteValue(const int dvl) {
     // 处理第二个位置的删除
     if (unit[1].value == dvl) {
         unit[1].value = 0;
-        unit[1].font = color::white;
+        unit[1].color = color::white;
         tools::put();
         tools::slept(200);
 
         // 下移后面的数字
         unit[1].value = unit[2].value;
-        unit[1].font = unit[2].font;
+        unit[1].color = unit[2].color;
         unit[2].value = 0;
-        unit[2].font = color::white;
+        unit[2].color = color::white;
 
         tools::put();
         tools::slept(200);
@@ -191,7 +191,7 @@ void CLASS::Table::List::deleteValue(const int dvl) {
     // 处理第三个位置的删除
     if (unit[2].value == dvl) {
         unit[2].value = 0;
-        unit[2].font  = color::white;
+        unit[2].color  = color::white;
         tools::put();
         tools::slept(200);
         return;
@@ -227,3 +227,94 @@ int  CLASS::Table::List::getScore() const {
 }
 
 //CLASS::Table
+bool CLASS::Table::inputValue(Table& t) {
+    if (list[0].bg_color==bg_use) {
+        if (list[0].isFull())
+            return false;
+        set_Color();
+        list[0].inputValue(random);
+        t.list[0].deleteValue(random);
+    }
+    if (list[1].bg_color==bg_use) {
+        if (list[1].isFull())
+            return false;
+        set_Color();
+        list[1].inputValue(random);
+        t.list[1].deleteValue(random);
+    }
+    if (list[2].bg_color==bg_use) {
+        if (list[2].isFull())
+            return false;
+        set_Color();
+        list[2].inputValue(random);
+        t.list[2].deleteValue(random);
+    }
+    return true;
+}
+void CLASS::Table::set_Color(AorD lr) {
+    if (list[1].bg_color!=color::black) {
+        if (lr == AorD::left) {
+            list[1].bg_color=color::black,
+            list[0].bg_color=bg_use;
+            list[0].flushFontColor();
+            list[1].flushFontColor();
+            list[2].flushFontColor();
+            list[0][0].color = font_bg_use;
+            list[0][1].color = font_bg_use;
+            list[0][2].color = font_bg_use;
+        }
+        if (lr == AorD::right) {
+            list[1].bg_color=color::black,
+            list[2].bg_color=bg_use;
+            list[0].flushFontColor();
+            list[1].flushFontColor();
+            list[2].flushFontColor();
+            list[2][0].color = font_bg_use;
+            list[2][1].color = font_bg_use;
+            list[2][2].color = font_bg_use;
+        }
+    }
+    if (list[0].bg_color!=color::black) {
+        if (lr == AorD::right) {
+            list[0].bg_color=color::black,
+            list[1].bg_color=bg_use;
+            list[0].flushFontColor();
+            list[1].flushFontColor();
+            list[2].flushFontColor();
+            list[1][0].color = font_bg_use;
+            list[1][1].color = font_bg_use;
+            list[1][2].color = font_bg_use;
+        }
+    }
+    if (list[2].bg_color!=color::black) {
+        if (lr == AorD::left) {
+            list[2].bg_color=color::black,
+            list[1].bg_color=bg_use;
+            list[0].flushFontColor();
+            list[1].flushFontColor();
+            list[2].flushFontColor();
+            list[1][0].color = font_bg_use;
+            list[1][1].color = font_bg_use;
+            list[1][2].color = font_bg_use;
+        }
+    }
+}
+void CLASS::Table::set_Color() {
+    list[0].bg_color = color::black;
+    list[1].bg_color = color::black;
+    list[2].bg_color = color::black;
+    list[0].flushFontColor();
+    list[1].flushFontColor();
+    list[2].flushFontColor();
+}
+bool CLASS::Table::allFull() {
+    if (list[0].isFull()&&list[1].isFull()&&list[2].isFull())
+        return true;
+    return false;
+}
+
+//Game
+void Game::ESC() {
+    std::cout<<std::endl<<"暂无内容"<<std::endl;
+    getch();
+}

@@ -7,5 +7,6 @@ add_executable(Knucklebones_SRII
         main.cpp
         box.h
         box.cpp
-        put.cpp
+        tools_put.cpp
+        Game_switch_process.cpp
 )

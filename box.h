@@ -35,6 +35,11 @@ enum class color : uint8_t {
     l_yellow =  14,  // 亮黄色 - 主要用作文字色
     white =     15,  // 白色色 - 主要用作文字色
 };
+enum class AorD : uint8_t {
+    left = 0,
+    right = 1
+};
+
 namespace stdio {
     using std::cout;
     using std::endl;
@@ -52,6 +57,7 @@ namespace tools {
     void put();
     inline void slept(const int ms){put();sleep(ms);}
 }
+
 namespace CLASS {
     class Random {
     private:
@@ -82,37 +88,50 @@ namespace CLASS {
         public:
             struct Unit {
                 int value {0};
-                color font{color::white};
+                color color{color::white};
             };
             Unit unit[3];
-        color bg{color::black};
+            color bg_color{color::black};
             List();
-            bool isFull() const{return unit[0].value != 0 && unit[1].value != 0 && unit[2].value != 0;}
+            [[nodiscard]] bool isFull() const{return unit[0].value != 0 && unit[1].value != 0 && unit[2].value != 0;}
             void flushFontColor();
             void deleteValue(int);
             void inputValue(int);
-            int getScore() const;
+            [[nodiscard]] int getScore() const;
             const Unit& operator[](int i) const {return unit[i];}
             Unit& operator[](int i) {return unit[i];}
         };
         List list[3];
         std::string gamer_name;
     public:
+        color bg_use{color::white};
+        color font_bg_use{color::black};
         int random{0};
-        color bg_use{color::l_gray};
         void setGamerName(const std::string& name) {gamer_name = name;}
-        const std::string& getGamerName() const {return gamer_name;}
+        [[nodiscard]] const std::string& getGamerName() const {return gamer_name;}
+        [[nodiscard]] bool allFull();
+
+        [[nodiscard]]bool inputValue(Table&);
+        void set_Color(AorD);
+        void set_Color();
+
         explicit Table(std::string g="Player") : gamer_name(std::move(g)) {}
+
         const List& operator[](int i) const {return list[i];}
         List& operator[](int i) {return list[i];}
-        int getScore(const int i) const {return list[i].getScore();}
-        int getScore() const {return list[0].getScore()+list[1].getScore()+list[2].getScore();}
+
+        [[nodiscard]] int getScore(const int i) const {return list[i].getScore();}
+        [[nodiscard]] int getScore() const {return list[0].getScore()+list[1].getScore()+list[2].getScore();}
     };
 }
+
 namespace Game {
     inline CLASS::Random random;
     inline CLASS::Alt alt;
     inline CLASS::Table T[2];
+    inline std::string gamer_name{"DeBug"};
+    void ESC();
+    void switch_process();
 }
 
 #endif

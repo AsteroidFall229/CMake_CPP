@@ -2,8 +2,8 @@
 // Created by AsteroidFall229 on 2025/8/23.
 //
 
-#ifndef PUT_H
-#define PUT_H
+#ifndef TOOLS_PUT_H
+#define TOOLS_PUT_H
 
 #include "box.h"
 
@@ -18,21 +18,21 @@ void tools::put() {
 //第一行
     if (Game::T[0][0][2].value==0) cout <<"   |";
     else {
-        setColor(Game::T[0][0][2].font, Game::T[0][0].bg);
+        setColor(Game::T[0][0][2].color, Game::T[0][0].bg_color);
         cout << " " << Game::T[0][0][2].value;
         setColor();
         cout <<" |";
     }
     if (Game::T[0][1][2].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][1][2].font, Game::T[0][1].bg);
+        setColor(Game::T[0][1][2].color, Game::T[0][1].bg_color);
         cout << " " << Game::T[0][1][2].value;
         setColor();
         cout <<" |";
     }
     if (Game::T[0][2][2].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][2][2].font, Game::T[0][2].bg);
+        setColor(Game::T[0][2][2].color, Game::T[0][2].bg_color);
         cout << " " << Game::T[0][2][2].value;
         setColor();
         cout <<" |";
@@ -50,21 +50,21 @@ void tools::put() {
 
     if (Game::T[0][0][1].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][0][1].font, Game::T[0][0].bg);
+        setColor(Game::T[0][0][1].color, Game::T[0][0].bg_color);
         cout << " " << Game::T[0][0][1].value;
         setColor();
         cout <<" |";
     }
     if (Game::T[0][1][1].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][1][1].font, Game::T[0][1].bg);
+        setColor(Game::T[0][1][1].color, Game::T[0][1].bg_color);
         cout << " " << Game::T[0][1][1].value;
         setColor();
         cout <<" |";
     }
     if (Game::T[0][2][1].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][2][1].font, Game::T[0][2].bg);
+        setColor(Game::T[0][2][1].color, Game::T[0][2].bg_color);
         cout << " " << Game::T[0][2][1].value;
         setColor();
         cout <<" |";
@@ -77,27 +77,27 @@ void tools::put() {
 
     //第三行
 
-    if (Game::T[0][0][0].value==0) cout << "   ";
+    if (Game::T[0][0][0].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][0][0].font, Game::T[0][0].bg);
+        setColor(Game::T[0][0][0].color, Game::T[0][0].bg_color);
         cout << " " << Game::T[0][0][0].value;
         setColor();
         cout <<" |";
     }
     if (Game::T[0][1][0].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][1][0].font, Game::T[0][1].bg);
+        setColor(Game::T[0][1][0].color, Game::T[0][1].bg_color);
         cout << " " << Game::T[0][1][0].value;
         setColor();
         cout <<" |";
     }
     if (Game::T[0][2][0].value==0) cout << "   |";
     else {
-        setColor(Game::T[0][2][0].font, Game::T[0][2].bg);
+        setColor(Game::T[0][2][0].color, Game::T[0][2].bg_color);
         cout << " " << Game::T[0][2][0].value;
         setColor();
         cout <<" |";
-
+    }
         cout<<endl;
         cout << "                  =================" << "    总分:" << Game::T[0].getScore() << endl;
         cout << "                    ";
@@ -116,54 +116,54 @@ void tools::put() {
         cout << endl << "                  =================" << "    总分:" << Game::T[1].getScore() << endl;
         cout << left << setw(20) <<"当前分数最高玩家:"<< "   |";
 
-        if (Game::T[1][0][0].value==0) cout << "   ";
+        if (Game::T[1][0][0].value==0) cout << "   |";
         else {
-            setColor(Game::T[1][0][0].font, Game::T[1][0].bg);
+            setColor(Game::T[1][0][0].color, Game::T[1][0].bg_color);
             cout << " " << Game::T[1][0][0].value;
             setColor();
             cout <<" |";
         }
         if (Game::T[1][1][0].value==0) cout << "   |";
         else {
-            setColor(Game::T[1][1][0].font, Game::T[1][1].bg);
+            setColor(Game::T[1][1][0].color, Game::T[1][1].bg_color);
             cout << " " << Game::T[1][1][0].value;
             setColor();
             cout <<" |";
         }
         if (Game::T[1][2][0].value==0) cout << "   |";
         else {
-            setColor(Game::T[1][2][0].font, Game::T[1][2].bg);
+            setColor(Game::T[1][2][0].color, Game::T[1][2].bg_color);
             cout << " " << Game::T[1][2][0].value;
             setColor();
             cout <<" |";
         }
 
         cout << endl;
-        cout << left << setw(20) << "DeBug";
+        cout << left << setw(20) << Game::gamer_name;
         cout << "+---+---+---+         +---+" << endl;
         cout << "                    |";
 
         if (Game::T[1][0][1].value==0) cout << "   |";
         else {
-            setColor(Game::T[1][0][1].font, Game::T[1][0].bg);
+            setColor(Game::T[1][0][1].color, Game::T[1][0].bg_color);
             cout << " " << Game::T[1][0][1].value;
             setColor();
             cout <<" |";
         }
         if (Game::T[1][1][1].value==0) cout << "   |";
         else {
-            setColor(Game::T[1][1][1].font, Game::T[1][1].bg);
+            setColor(Game::T[1][1][1].color, Game::T[1][1].bg_color);
             cout << " " << Game::T[1][1][1].value;
             setColor();
             cout <<" |";
         }
         if (Game::T[1][2][1].value==0) cout << "   |";
         else {
-            setColor(Game::T[1][2][1].font, Game::T[1][2].bg);
+            setColor(Game::T[1][2][1].color, Game::T[1][2].bg_color);
             cout << " " << Game::T[1][2][1].value;
             setColor();
             cout <<" |";
-
+        }
             cout << "         | ";
             if(Game::T[1].random == 0) cout << " ";
             else cout << Game::T[1].random;
@@ -181,33 +181,30 @@ void tools::put() {
 
             if (Game::T[1][0][2].value==0) cout <<"   |";
             else {
-                setColor(Game::T[1][0][2].font, Game::T[1][0].bg);
+                setColor(Game::T[1][0][2].color, Game::T[1][0].bg_color);
                 cout << " " << Game::T[1][0][2].value;
                 setColor();
                 cout <<" |";
             }
             if (Game::T[1][1][2].value==0) cout << "   |";
             else {
-                setColor(Game::T[1][1][2].font, Game::T[1][1].bg);
+                setColor(Game::T[1][1][2].color, Game::T[1][1].bg_color);
                 cout << " " << Game::T[1][1][2].value;
                 setColor();
                 cout <<" |";
             }
             if (Game::T[1][2][2].value==0) cout << "   |";
             else {
-                setColor(Game::T[1][2][2].font, Game::T[1][2].bg);
+                setColor(Game::T[1][2][2].color, Game::T[1][2].bg_color);
                 cout << " " << Game::T[1][2][2].value;
                 setColor();
                 cout <<" |";
-
+            }
                 cout << "             :骰子" << endl;
                 cout << "                    +---+---+---+" << "                    " << endl;
                 cout << "                    ";
 
                 cout << right << setw(33) << Game::T[1].getGamerName() << endl;
-            }
-        }
-    }
 }//输出UI
 
-#endif //PUT_H
+#endif //TOOLS_PUT_H
