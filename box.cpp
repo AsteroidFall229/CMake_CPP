@@ -19,10 +19,10 @@ void tools::initConsole() {
     dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     SetConsoleMode(hOut, dwMode);
 }
-void tools::setColor(const color font, const color bg) {
+void tools::setColor(const color &font, const color &background) {
     static uint8_t _font, _bg;
     _font=static_cast<uint8_t>(font);
-    _bg=static_cast<uint8_t>(bg);
+    _bg=static_cast<uint8_t>(background);
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     WORD color_attr = (_bg << 4) | _font;
@@ -84,7 +84,7 @@ CLASS::Random::operator int() {
 
 //CLASS::Table::List
 CLASS::Table::List::List () {
-    unit[0].value=1;
+    unit[0].value=0;
     unit[1].value=0;
     unit[2].value=0;
 

@@ -16,5 +16,6 @@ int main() {
     Game::T[0][0].flushFontColor();
     tools::put();
     Game::switch_process();
+    getch();
     return 0;
 }

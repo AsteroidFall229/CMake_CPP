@@ -49,13 +49,15 @@ namespace stdio {
     using std::setw;
 }
 namespace tools {
-    inline void sleep(const int ms) {std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
+    inline void sleep(const int& ms) {std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
     inline void cls() {system("cls");}
     static void windowSize(int width, int height);
     void initConsole();
-    void setColor(color font = color::white, color bg = color::black);
+    void setColor(const color &font = color::white, const color &background = color::black);
+    void PLU(const int&,const color&,const color&);
+    void put_last();
     void put();
-    inline void slept(const int ms){put();sleep(ms);}
+    inline void slept(const int& ms){put();sleep(ms);}
 }
 
 namespace CLASS {
