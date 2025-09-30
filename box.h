@@ -51,7 +51,7 @@ namespace stdio {
 namespace tools {
     inline void sleep(const int& ms) {std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
     inline void cls() {system("cls");}
-    static void windowSize(int width, int height);
+    static void windowSize(const int &width, const int &height);
     void initConsole();
     void setColor(const color &font = color::white, const color &background = color::black);
     void PLU(const int&,const color&,const color&);
@@ -97,11 +97,11 @@ namespace CLASS {
             List();
             [[nodiscard]] bool isFull() const{return unit[0].value != 0 && unit[1].value != 0 && unit[2].value != 0;}
             void flushFontColor();
-            void deleteValue(int);
-            void inputValue(int);
+            void deleteValue(const int &);
+            void inputValue(const int &);
             [[nodiscard]] int getScore() const;
-            const Unit& operator[](int i) const {return unit[i];}
-            Unit& operator[](int i) {return unit[i];}
+            const Unit& operator[](const int& i) const {return unit[i];}
+            Unit& operator[](const int& i) {return unit[i];}
         };
         List list[3];
         std::string gamer_name;
@@ -111,7 +111,7 @@ namespace CLASS {
         int random{0};
         void setGamerName(const std::string& name) {gamer_name = name;}
         [[nodiscard]] const std::string& getGamerName() const {return gamer_name;}
-        [[nodiscard]] bool allFull();
+        [[nodiscard]] bool allFull() const;
 
         [[nodiscard]]bool inputValue(Table&);
         void set_Color(AorD);
@@ -119,10 +119,10 @@ namespace CLASS {
 
         explicit Table(std::string g="Player") : gamer_name(std::move(g)) {}
 
-        const List& operator[](int i) const {return list[i];}
-        List& operator[](int i) {return list[i];}
+        const List& operator[](const int& i) const {return list[i];}
+        List& operator[](const int& i) {return list[i];}
 
-        [[nodiscard]] int getScore(const int i) const {return list[i].getScore();}
+        [[nodiscard]] int getScore(const int& i) const {return list[i].getScore();}
         [[nodiscard]] int getScore() const {return list[0].getScore()+list[1].getScore()+list[2].getScore();}
     };
 }

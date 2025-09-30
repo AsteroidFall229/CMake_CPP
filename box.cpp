@@ -28,9 +28,9 @@ void tools::setColor(const color &font, const color &background) {
     WORD color_attr = (_bg << 4) | _font;
     SetConsoleTextAttribute(hConsole, color_attr);
 }
-void tools::windowSize(const int width, const int height) {
+void tools::windowSize(const int &width, const int &height) {
     HWND hwnd = GetConsoleWindow();
-    if (hwnd != NULL) {
+    if (hwnd != nullptr) {
         //SetWindowLong(hwnd, GWL_STYLE,GetWindowLong(hwnd, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_THICKFRAME);      // 禁用窗口缩放
         RECT rect;
         GetWindowRect(hwnd, &rect);
@@ -131,73 +131,97 @@ void CLASS::Table::List::flushFontColor() {
     unit[1].color = color::white;
     unit[2].color = color::white;
 }
-void CLASS::Table::List::deleteValue(const int dvl) {
+void CLASS::Table::List::deleteValue(const int &del) {
     // 标记要删除的数字
-    if (unit[0].value == dvl) unit[0].color = color::red;
-    if (unit[1].value == dvl) unit[1].color = color::red;
-    if (unit[2].value == dvl) unit[2].color = color::red;
+    if (unit[0].value == del) unit[0].color = color::red;
+    if (unit[1].value == del) unit[1].color = color::red;
+    if (unit[2].value == del) unit[2].color = color::red;
 
-    tools::put();
-    tools::slept(200);
-
-    // 处理第一个位置的删除
-    if (unit[0].value == dvl) {
+    tools::slept(500);
+    //001
+    if (unit[0].value == del) {
         unit[0].value = 0;
         unit[0].color = color::white;
-        tools::put();
-        tools::slept(200);
-
-        // 下移后面的数字
-        unit[0].value = unit[1].value;
+        tools::slept(500);
         unit[0].color = unit[1].color;
+        unit[0].value = unit[1].value;
         unit[1].value = unit[2].value;
         unit[1].color = unit[2].color;
         unit[2].value = 0;
         unit[2].color = color::white;
-
-        tools::put();
         tools::slept(200);
-
-        // 检查是否还有需要删除的（现在可能在新的位置）
-        if (unit[0].value == dvl || unit[1].value == dvl) {
-            deleteValue(dvl);  // 递归处理剩余的数字
+        //-01
+        if (unit[0].value == del) {
+            unit[0].value = 0;
+            unit[0].color = color::white;
+            tools::slept(500);
+            unit[0].color = unit[1].color;
+            unit[0].value = unit[1].value;
+            unit[1].value = 0;
+            unit[1].color = color::white;
+            tools::slept(200);
+            //001
+            if (unit[0].value == del) {
+                unit[0].value = 0;
+                unit[0].color = color::white;
+                tools::slept(500);
+                unit[0].color = unit[1].color;
+                unit[0].value = unit[1].value;
+                unit[1].value = 0;
+                unit[1].color = color::white;
+                tools::slept(200);
+                return;
+            }
+            //010
+            if (unit[1].value == del) {
+                unit[1].value = 0;
+                unit[1].color = color::white;
+                tools::slept(400);
+                return;
+            }
         }
-        return;
+        //-10
+        if (unit[1].value == del) {
+            unit[1].value = 0;
+            unit[1].color = color::white;
+            tools::slept(400);
+        }
     }
 
-    // 处理第二个位置的删除
-    if (unit[1].value == dvl) {
+    //010
+    if (unit[1].value == del) {
         unit[1].value = 0;
         unit[1].color = color::white;
-        tools::put();
-        tools::slept(200);
-
-        // 下移后面的数字
+        tools::slept(500);
         unit[1].value = unit[2].value;
         unit[1].color = unit[2].color;
         unit[2].value = 0;
         unit[2].color = color::white;
-
-        tools::put();
         tools::slept(200);
-
-        // 检查第一个位置是否变成要删除的数字
-        if (unit[0].value == dvl) {
-            deleteValue(dvl);  // 递归处理
+        //-10
+        if (unit[1].value == del) {
+            unit[1].value = 0;
+            unit[1].color = color::white;
+            tools::slept(400);
+            return;
         }
-        return;
+        if (unit[2].value == del) {
+            unit[2].value = 0;
+            unit[2].color = color::white;
+            tools::slept(400);
+            return;
+        }
     }
 
-    // 处理第三个位置的删除
-    if (unit[2].value == dvl) {
+    //100
+    if (unit[2].value == del) {
         unit[2].value = 0;
-        unit[2].color  = color::white;
-        tools::put();
-        tools::slept(200);
+        unit[2].color = color::white;
+        tools::slept(400);
         return;
     }
 }
-void CLASS::Table::List::inputValue(const int ivl) {
+void CLASS::Table::List::inputValue(const int &ivl) {
     if (isFull()) {
         std::cerr<<"err:isFull,but input";
         return;
@@ -251,7 +275,7 @@ bool CLASS::Table::inputValue(Table& t) {
     }
     return true;
 }
-void CLASS::Table::set_Color(AorD lr) {
+void CLASS::Table::set_Color(const AorD lr) {
     if (list[1].bg_color!=color::black) {
         if (lr == AorD::left) {
             list[1].bg_color=color::black,
@@ -307,7 +331,7 @@ void CLASS::Table::set_Color() {
     list[1].flushFontColor();
     list[2].flushFontColor();
 }
-bool CLASS::Table::allFull() {
+bool CLASS::Table::allFull() const {
     if (list[0].isFull()&&list[1].isFull()&&list[2].isFull())
         return true;
     return false;
