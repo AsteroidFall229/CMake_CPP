@@ -7,15 +7,9 @@ CLASS::Random ran;
 
 int main() {
     tools::initConsole();
-    //tools::setColor(color::red,color::cyan);
-    for (int i = 1; i <= 100; i++) {
-        cout << ran << "\n" ;
-    }
-    tools::sleep(500);
-    //tools::cls();
-    Game::T[0][0].flushFontColor();
-    tools::put();
+    Game::game_start();
     Game::switch_process();
+    Game::over();
     getch();
     return 0;
 }

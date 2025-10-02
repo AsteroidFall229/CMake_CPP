@@ -7,14 +7,14 @@
 
 #include <algorithm>
 #include <array>
-#include <iostream>
-#include <random>
-#include <iomanip>
 #include <cmath>
 #include <condition_variable>
+#include <conio.h>
+#include <iomanip>
+#include <iostream>
+#include <random>
 #include <vector>
 #include <windows.h>
-#include <conio.h>
 
 enum class color : uint8_t {
     black =     0,   // 黑色 - 文字和背景都可用
@@ -50,12 +50,10 @@ namespace stdio {
 }
 namespace tools {
     inline void sleep(const int& ms) {std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
-    inline void cls() {system("cls");}
     static void windowSize(const int &width, const int &height);
     void initConsole();
     void setColor(const color &font = color::white, const color &background = color::black);
     void PLU(const int&,const color&,const color&);
-    void put_last();
     void put();
     inline void slept(const int& ms){put();sleep(ms);}
 }
@@ -100,8 +98,8 @@ namespace CLASS {
             void deleteValue(const int &);
             void inputValue(const int &);
             [[nodiscard]] int getScore() const;
-            const Unit& operator[](const int& i) const {return unit[i];}
-            Unit& operator[](const int& i) {return unit[i];}
+            const Unit& operator[](const int i) const {return unit[i];}
+            Unit& operator[](const int i) {return unit[i];}
         };
         List list[3];
         std::string gamer_name;
@@ -119,10 +117,10 @@ namespace CLASS {
 
         explicit Table(std::string g="Player") : gamer_name(std::move(g)) {}
 
-        const List& operator[](const int& i) const {return list[i];}
-        List& operator[](const int& i) {return list[i];}
+        const List& operator[](const int i) const {return list[i];}
+        List& operator[](const int i) {return list[i];}
 
-        [[nodiscard]] int getScore(const int& i) const {return list[i].getScore();}
+        [[nodiscard]] int getScore(const int i) const {return list[i].getScore();}
         [[nodiscard]] int getScore() const {return list[0].getScore()+list[1].getScore()+list[2].getScore();}
     };
 }
@@ -132,8 +130,10 @@ namespace Game {
     inline CLASS::Alt alt;
     inline CLASS::Table T[2];
     inline std::string gamer_name{"DeBug"};
-    void ESC();
+    void menu();
+    void game_start();
     void switch_process();
+    void over();
 }
 
 #endif

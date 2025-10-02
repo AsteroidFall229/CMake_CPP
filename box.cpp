@@ -280,7 +280,6 @@ void CLASS::Table::set_Color(const AorD lr) {
         if (lr == AorD::left) {
             list[1].bg_color=color::black,
             list[0].bg_color=bg_use;
-            list[0].flushFontColor();
             list[1].flushFontColor();
             list[2].flushFontColor();
             list[0][0].color = font_bg_use;
@@ -292,7 +291,6 @@ void CLASS::Table::set_Color(const AorD lr) {
             list[2].bg_color=bg_use;
             list[0].flushFontColor();
             list[1].flushFontColor();
-            list[2].flushFontColor();
             list[2][0].color = font_bg_use;
             list[2][1].color = font_bg_use;
             list[2][2].color = font_bg_use;
@@ -303,7 +301,6 @@ void CLASS::Table::set_Color(const AorD lr) {
             list[0].bg_color=color::black,
             list[1].bg_color=bg_use;
             list[0].flushFontColor();
-            list[1].flushFontColor();
             list[2].flushFontColor();
             list[1][0].color = font_bg_use;
             list[1][1].color = font_bg_use;
@@ -315,7 +312,6 @@ void CLASS::Table::set_Color(const AorD lr) {
             list[2].bg_color=color::black,
             list[1].bg_color=bg_use;
             list[0].flushFontColor();
-            list[1].flushFontColor();
             list[2].flushFontColor();
             list[1][0].color = font_bg_use;
             list[1][1].color = font_bg_use;
@@ -328,7 +324,6 @@ void CLASS::Table::set_Color() {
     list[1].bg_color = color::black;
     list[2].bg_color = color::black;
     list[0].flushFontColor();
-    list[1].flushFontColor();
     list[2].flushFontColor();
 }
 bool CLASS::Table::allFull() const {
@@ -338,7 +333,20 @@ bool CLASS::Table::allFull() const {
 }
 
 //Game
-void Game::ESC() {
+void Game::menu() {
     std::cout<<std::endl<<"暂无内容"<<std::endl;
     getch();
 }
+void Game::game_start() {
+    T[0].setGamerName("AsteroidFall229");
+    T[1].setGamerName("zwx3570");
+}
+void Game::over() {
+    T[0].set_Color();
+    T[1].set_Color();
+    T[0].random=0;
+    T[1].random=0;
+    tools::put();
+    std::cout<<gamer_name<<"获得最终胜利"<<std::endl;
+}
+
