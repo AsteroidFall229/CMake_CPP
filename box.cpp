@@ -334,7 +334,7 @@ bool CLASS::Table::allFull() const {
 
 //Game
 void Game::menu() {
-    std::cout<<std::endl<<"暂无内容"<<std::endl;
+    std::cout<<std::endl<<"敬请期待(bushi"<<std::endl;
     getch();
 }
 void Game::game_start() {
